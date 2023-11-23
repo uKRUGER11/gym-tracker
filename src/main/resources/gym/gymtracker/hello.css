@@ -1,0 +1,14 @@
+.left-form {
+    -fx-background-color:linear-gradient(to bottom right, #2115ff, #8a2be2);
+}
+
+.button-login {
+    -fx-background-color: #8a2be2;
+    -fx-border-radius: 10px;
+}
+
+.button-signUp {
+    -fx-background-color: transperent;
+    -fx-cursor: hand;
+}
+
