@@ -74,11 +74,11 @@ public class MainAppController implements Initializable {
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
 
-                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setScene(scene);
                     stage.show();
                 } else {
-                    alert.errorMessage("Preencha todos os campos.");
+                    alert.errorMessage("Usuário e/ou senha incorretos.");
                 }
             }
 

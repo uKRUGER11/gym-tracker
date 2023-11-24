@@ -1,10 +1,20 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('gym/gymtracker/Montserrat-SemiBoldItalic.ttf');
+}
+
+* {
+    -fx-font-family: 'Montserrat';
+}
+
 .left-form {
-    -fx-background-color:linear-gradient(to bottom right, #2115ff, #8a2be2);
+    -fx-background-color:linear-gradient(to bottom right, #18224a ,#f4e022);
 }
 
 .button-login {
-    -fx-background-color: #8a2be2;
+    -fx-background-color: #18224a;
     -fx-border-radius: 10px;
+    -fx-text-fill: #f4e022;
 }
 
 .button-signUp {
@@ -12,3 +22,145 @@
     -fx-cursor: hand;
 }
 
+.button-signOut {
+    -fx-background-color: transperent;
+    -fx-cursor: hand;
+}
+
+.top-form {
+   -fx-background-color: #fff;
+   -fx-border-color: #000;
+   -fx-border-width: .4px .4px .2px .4px;
+}
+
+.semi-top-form {
+   -fx-background-color: #efefef;
+   -fx-border-color: #000;
+   -fx-border-width: .2px .4px .4px .4px;
+}
+
+.close {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.close:hover {
+    -fx-background-color: #fb3d63;
+}
+
+.nav {
+    -fx-background-color: linear-gradient(to bottom, #18224a 95%, #f4e022 100%);
+}
+
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Montserrat';
+    -fx-alignment: CENTER-LEFT;
+}
+
+.shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 6, 0, 0, 0);
+}
+
+.white-background {
+    -fx-background-color: #fff;
+    -fx-background-radius: 8px;
+}
+
+.card {
+    -fx-background-color: linear-gradient(to right, #18224a 95%, #f4e022 100%);
+    -fx-background-radius: 4px;
+    -fx-text-fill: #fff;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-padding: 0px;
+    -fx-border-color: #18224a;
+    -fx-border-width: 2px;
+    -fx-border-radius: 8px;
+    -fx-font-family: 'Montserrat';
+}
+
+.table-view .column-header {
+    -fx-background-color: linear-gradient(to bottom right, #18224a 95%, #f4e022 100%);
+    -fx-background-radius: 8px 8px 0px 0px;
+    -fx-background-inset: 0 0 0 0;
+    -fx-font-family: 'Montserrat';
+}
+
+.table-view .column-header, .filter {
+     -fx-background-color: transparent;
+     -fx-size: 40px;
+    -fx-font-family: 'Montserrat';
+}
+
+.table-view .column-header, .label {
+     -fx-text-fill: #000;
+    -fx-font-family: 'Montserrat';
+}
+
+.textfield {
+    -fx-background-color: linear-gradient(to bottom, #efefef, #eee);
+    -fx-background-radius: 4px;
+    -fx-border-color: #18224a;
+    -fx-border-width: .8px;
+    -fx-font-family: 'Montserrat';
+    -fx-border-radius: 4px;
+}
+
+.textfield:focused {
+    -fx-background-color: #fff;
+    -fx-border-width: 1px;
+}
+
+.add-btn {
+    -fx-background-color: #4CAF50;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Montserrat';
+}
+
+.update-btn {
+    -fx-background-color: #2196F3;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Montserrat';
+}
+
+.delete-btn {
+    -fx-background-color: #FF0000;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Montserrat';
+}
+
+.progress-bar {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 10;
+}
+
+.progress-bar .bar {
+    -fx-background-color: #4caf50; /
+    -fx-background-radius: 10;
+}
+
+.add-button {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.add-button:pressed {
+    -fx-background-color: #45a049;
+}

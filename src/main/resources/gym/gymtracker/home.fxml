@@ -1,13 +1,273 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gym.gymtracker.MainAppController">
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-      <Label text="LOGIN CONCLUÍDO!" />
+      <AnchorPane fx:id="mainForm" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <BorderPane layoutX="131.0" layoutY="90.0" prefHeight="500.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane prefHeight="50.0" prefWidth="800.0" styleClass="semi-top-form" stylesheets="@hello.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="108.0" layoutY="-75.0" prefHeight="41.0" prefWidth="800.0" styleClass="top-form" stylesheets="@hello.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="49.0" layoutY="12.0" text="Gym Tracker">
+                                 <font>
+                                    <Font name="Montserrat SemiBold Italic" size="12.0" />
+                                 </font></Label>
+                              <Button fx:id="btnClose" layoutX="752.0" mnemonicParsing="false" onAction="#close" prefHeight="24.0" prefWidth="49.0" styleClass="close" stylesheets="@hello.css">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="CLOSE" />
+                                 </graphic>
+                              </Button>
+                              <ImageView fitHeight="47.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@logo-gym-tracker.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <AnchorPane prefHeight="450.0" prefWidth="160.0" styleClass="nav" stylesheets="@hello.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <FontAwesomeIconView fill="WHITE" glyphName="ID_CARD" layoutX="49.0" layoutY="64.0" size="50" wrappingWidth="38.0" />
+                        <Button layoutX="14.0" layoutY="110.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" styleClass="nav-btn" stylesheets="@hello.css" text="Home">
+                           <font>
+                              <Font name="Montserrat SemiBold Italic" size="12.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="20" />
+                           </graphic>
+                        </Button>
+                        <Button layoutX="14.0" layoutY="144.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" styleClass="nav-btn" stylesheets="@hello.css" text="Cargas">
+                           <font>
+                              <Font name="Montserrat SemiBold Italic" size="12.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@dumbeel.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button layoutX="14.0" layoutY="178.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" styleClass="nav-btn" stylesheets="@hello.css" text="Seu Progresso">
+                           <font>
+                              <Font name="Montserrat SemiBold Italic" size="12.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="HOURGLASS" size="18" />
+                           </graphic>
+                        </Button>
+                        <Button layoutX="11.0" layoutY="391.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="57.0" styleClass="button-signOut" stylesheets="@hello.css" text="Sair" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" />
+                           </graphic>
+                        </Button>
+                        <Line endX="100.0" layoutX="45.0" layoutY="86.0" startX="-35.0" stroke="WHITE" />
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="153.0" layoutY="125.0" prefHeight="450.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane layoutX="12.0" layoutY="4.0" prefHeight="436.0" prefWidth="618.0" stylesheets="@hello.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                 <styleClass>
+                                    <String fx:value="white-background" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
+                                 <children>
+                                    <AnchorPane layoutX="1.0" layoutY="-3.0" prefHeight="90.0" prefWidth="618.0" stylesheets="@hello.css">
+                                       <styleClass>
+                                          <String fx:value="white-background" />
+                                          <String fx:value="shadow" />
+                                       </styleClass>
+                                       <children>
+                                          <AnchorPane layoutX="15.0" layoutY="7.0" prefHeight="79.0" prefWidth="240.0" styleClass="card" stylesheets="@hello.css">
+                                             <children>
+                                                <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" layoutX="14.0" layoutY="57.0" size="45" />
+                                                <Label fx:id="txtDate" layoutX="101.0" layoutY="17.0" style="-fx-text-fill: #FFF;" text="/      /" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="30.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane layoutX="295.0" layoutY="7.0" prefHeight="79.0" prefWidth="199.0" styleClass="card" stylesheets="@hello.css">
+                                             <children>
+                                                <ImageView fitHeight="49.0" fitWidth="45.0" layoutX="17.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@dumbeel.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label layoutX="90.0" layoutY="52.0" style="-fx-text-fill: #FFF;" stylesheets="@hello.css" text="Carga Máxima" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="txtTotalHeavy" layoutX="176.0" layoutY="7.0" style="-fx-text-fill: #FFF;" styleClass="card" stylesheets="@hello.css" text="0" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="14.0" layoutY="97.0" prefHeight="324.0" prefWidth="270.0" stylesheets="@hello.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="95.0">
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="white-background" />
+                                       </styleClass>
+                                       <children>
+                                          <BarChart fx:id="chartDays" layoutX="-127.0" layoutY="-50.0" prefHeight="350.0" prefWidth="373.0" title="Dias de treino" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <xAxis>
+                                              <CategoryAxis prefWidth="213.0" side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                              <NumberAxis side="LEFT" />
+                                            </yAxis>
+                                          </BarChart>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="336.0" layoutY="96.0" prefHeight="324.0" prefWidth="270.0" stylesheets="@hello.css" AnchorPane.rightAnchor="15.0">
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="white-background" />
+                                       </styleClass>
+                                       <children>
+                                          <BarChart fx:id="chartLevel" layoutX="-8.0" prefHeight="350.0" prefWidth="373.0" title="Niveis de Cargas" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0">
+                                             <xAxis>
+                                                <CategoryAxis prefWidth="213.0" side="BOTTOM" />
+                                             </xAxis>
+                                             <yAxis>
+                                                <NumberAxis side="LEFT" />
+                                             </yAxis>
+                                          </BarChart>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="9.0" layoutY="11.0" prefHeight="429.0" prefWidth="622.0" stylesheets="@hello.css" visible="false">
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="white-background" />
+                           </styleClass>
+                           <children>
+                              <Label layoutX="14.0" layoutY="198.0" text="Preencha os seguintes dados:">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="39.0" layoutY="239.0" text="Exercício:">
+                                 <font>
+                                    <Font name="Montserrat SemiBold Italic" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtExercise" layoutX="112.0" layoutY="237.0" prefHeight="25.0" prefWidth="158.0" styleClass="textfield" stylesheets="@hello.css" />
+                              <Label layoutX="39.0" layoutY="273.0" text="Carga(Kg):">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtHeavy" layoutX="112.0" layoutY="271.0" prefHeight="25.0" prefWidth="158.0" styleClass="textfield" stylesheets="@hello.css" />
+                              <Label layoutX="37.0" layoutY="307.0" text="Máximo de Repetições:">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="37.0" layoutY="341.0" text="Mínimo de Repetições:">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtMaxRep" layoutX="197.0" layoutY="306.0" prefHeight="25.0" prefWidth="158.0" styleClass="textfield" stylesheets="@hello.css" />
+                              <TextField fx:id="txtMinRep" layoutX="198.0" layoutY="339.0" prefHeight="25.0" prefWidth="158.0" styleClass="textfield" stylesheets="@hello.css" />
+                              <Button fx:id="btnAdd" alignment="CENTER" contentDisplay="RIGHT" layoutX="522.0" layoutY="390.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" styleClass="add-btn" stylesheets="@hello.css" text="    Adicionar" AnchorPane.leftAnchor="522.0" />
+                              <Button fx:id="btnEdit" layoutX="441.0" layoutY="390.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" styleClass="update-btn" stylesheets="@hello.css" text="    Editar" />
+                              <Button fx:id="btnDelete" layoutX="357.0" layoutY="390.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="73.0" styleClass="delete-btn" stylesheets="@hello.css" text="    Excluir">
+                                 <font>
+                                    <Font name="Montserrat SemiBold Italic" size="12.0" />
+                                 </font>
+                              </Button>
+                              <FontAwesomeIconView glyphName="PLUS" layoutX="533.0" layoutY="410.0" />
+                              <FontAwesomeIconView glyphName="PENCIL" layoutX="453.0" layoutY="409.0" />
+                              <FontAwesomeIconView glyphName="TRASH" layoutX="366.0" layoutY="409.0" />
+                              <AnchorPane prefHeight="180.0" prefWidth="622.0" stylesheets="@hello.css">
+                                 <styleClass>
+                                    <String fx:value="shadow" />
+                                    <String fx:value="white-background" />
+                                 </styleClass>
+                                 <children>
+                                    <TableView fx:id="tableViewHeavys" layoutX="8.0" layoutY="8.0" prefHeight="167.0" prefWidth="610.0" stylesheets="@hello.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
+                                      <columns>
+                                        <TableColumn fx:id="tableColumnExercise" prefWidth="246.0" text="Exercício" />
+                                        <TableColumn fx:id="tableColumnHeavy" minWidth="0.0" prefWidth="118.0" text="Carga (Kg)" />
+                                          <TableColumn fx:id="tableColumnMaxRep" prefWidth="84.0" text="Máx. Rep" />
+                                          <TableColumn fx:id="tableColumnMinRep" prefWidth="82.0" text="Min. Rep" />
+                                      </columns>
+                                       <styleClass>
+                                          <String fx:value="columns-header" />
+                                          <String fx:value="table-view" />
+                                       </styleClass>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="12.0" layoutY="11.0" prefHeight="431.0" prefWidth="615.0" stylesheets="@hello.css" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <ProgressBar layoutX="83.0" layoutY="186.0" prefHeight="29.0" prefWidth="483.0" progress="0.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="186.0" />
+                              <Label layoutX="14.0" layoutY="14.0" text="Deposite cada treino seu aqui, durante 1 ano:">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="410.0" layoutY="386.0" prefHeight="30.0" prefWidth="196.0" text="Data:">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="284.0" layoutY="236.0" mnemonicParsing="false" text="+1">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="white-background" />
+                           </styleClass>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children></AnchorPane>
    </children>
 </StackPane>
