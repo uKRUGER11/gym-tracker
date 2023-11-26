@@ -42,7 +42,6 @@ public class MainAppController implements Initializable {
         System.exit(0);
     }
 
-
     private Connection connect;
     private PreparedStatement ps;
     private ResultSet rs;
@@ -65,6 +64,10 @@ public class MainAppController implements Initializable {
                 alert.errorMessage("Preencha todos os campos.");
             } else {
                 if (rs.next()) {
+                    int userId = rs.getInt("Id");
+
+
+                    AppContext.setCurrentUserId(userId);
                     alert.sucessMessage("Login concluído com sucesso!");
 
                     btnLogin.getScene().getWindow().hide();

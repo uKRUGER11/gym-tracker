@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Montserrat';
-    src: url('gym/gymtracker/Montserrat-SemiBoldItalic.ttf');
+    src: url('Montserrat-SemiBoldItalic.ttf');
 }
 
 * {
@@ -150,17 +150,6 @@
 }
 
 .progress-bar .bar {
-    -fx-background-color: #4caf50; /
-    -fx-background-radius: 10;
-}
-
-.add-button {
     -fx-background-color: #4caf50;
-    -fx-text-fill: #ffffff;
-    -fx-background-radius: 5;
-    -fx-cursor: hand;
-}
-
-.add-button:pressed {
-    -fx-background-color: #45a049;
+    -fx-background-radius: 10;
 }
