@@ -22,6 +22,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -105,6 +106,7 @@ public class HomeController implements Initializable {
     @FXML
     private TextField txtMinRep;
 
+    private Statement st;
     private Connection connect;
     private PreparedStatement ps;
     private ResultSet rs;
@@ -139,7 +141,6 @@ public class HomeController implements Initializable {
     }
 
     private ObservableList<HeavysData> addHeavyDataList;
-
     public void addHeavyShowList() {
         addHeavyDataList = addHeavyList();
 
@@ -164,6 +165,66 @@ public class HomeController implements Initializable {
         txtHeavy.setText(String.valueOf(heavyValue));
         txtMaxRep.setText(Integer.toString(heavys.getMaxRep()));
         txtMinRep.setText(Integer.toString(heavys.getMinRep()));
+    }
+
+    public void heavysAdd() {
+        int currentUserId = AppContext.getCurrentUserId();
+
+        String insertHeavy = "INSERT INTO loads (exercise, heavy, MaxRep, MinRep, UserId) VALUES (?, ?, ?, ?, ?)";
+
+        connect = DB.connectDb();
+
+        try {
+            Alert alert;
+
+            if (txtExercise.getText().isEmpty() || txtHeavy.getText().isEmpty() || txtMaxRep.getText().isEmpty() || txtMinRep.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Mensagem de erro");
+                alert.setHeaderText(null);
+                alert.setContentText("Preencha todos os campos.");
+                alert.showAndWait();
+            } else {
+                String checkHeavy = "SELECT * FROM loads WHERE exercise  = '" + txtExercise.getText() + "'";
+
+                st  = connect.createStatement();
+                rs = st.executeQuery(checkHeavy);
+
+                if (rs.next()) {
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Mensagem de erro");
+                    alert.setHeaderText(null);
+                    alert.setContentText("O exercício " + txtExercise.getText() + " já existe!");
+                    alert.showAndWait();
+                } else {
+                    ps = connect.prepareStatement(insertHeavy);
+                    ps.setString(1, txtExercise.getText());
+                    ps.setDouble(2, Double.parseDouble(txtHeavy.getText()));
+                    ps.setInt(3, Integer.parseInt(txtMaxRep.getText()));
+                    ps.setInt(4, Integer.parseInt(txtMinRep.getText()));
+                    ps.setInt(5, currentUserId);
+
+                    ps.executeUpdate();
+
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Mensagem de informação");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Exercício adcionado com sucesso!");
+                    alert.showAndWait();
+
+                    addHeavyShowList();
+                    heavysAddClear();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void heavysAddClear() {
+        txtExercise.setText("");
+        txtHeavy.setText("");
+        txtMaxRep.setText("");
+        txtMinRep.setText("");
     }
 
     public void logout() {

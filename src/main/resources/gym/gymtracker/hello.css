@@ -1,10 +1,7 @@
-@font-face {
-    font-family: 'Montserrat';
-    src: url('Montserrat-SemiBoldItalic.ttf');
-}
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 * {
-    -fx-font-family: 'Montserrat';
+    -fx-font-family: 'Lato', sans-serif;
 }
 
 .left-form {
@@ -18,12 +15,12 @@
 }
 
 .button-signUp {
-    -fx-background-color: transperent;
+    -fx-background-color: transparent;
     -fx-cursor: hand;
 }
 
 .button-signOut {
-    -fx-background-color: transperent;
+    -fx-background-color: transparent;
     -fx-cursor: hand;
 }
 
@@ -57,7 +54,6 @@
     -fx-cursor: hand;
     -fx-text-fill: #fff;
     -fx-font-size: 14px;
-    -fx-font-family: 'Montserrat';
     -fx-alignment: CENTER-LEFT;
 }
 
@@ -82,25 +78,21 @@
     -fx-border-color: #18224a;
     -fx-border-width: 2px;
     -fx-border-radius: 8px;
-    -fx-font-family: 'Montserrat';
 }
 
 .table-view .column-header {
     -fx-background-color: linear-gradient(to bottom right, #18224a 95%, #f4e022 100%);
     -fx-background-radius: 8px 8px 0px 0px;
     -fx-background-inset: 0 0 0 0;
-    -fx-font-family: 'Montserrat';
 }
 
 .table-view .column-header, .filter {
      -fx-background-color: transparent;
      -fx-size: 40px;
-    -fx-font-family: 'Montserrat';
 }
 
 .table-view .column-header, .label {
      -fx-text-fill: #000;
-    -fx-font-family: 'Montserrat';
 }
 
 .textfield {
@@ -108,7 +100,6 @@
     -fx-background-radius: 4px;
     -fx-border-color: #18224a;
     -fx-border-width: .8px;
-    -fx-font-family: 'Montserrat';
     -fx-border-radius: 4px;
 }
 
@@ -123,7 +114,6 @@
     -fx-cursor: hand;
     -fx-text-fill: #fff;
     -fx-font-size: 14px;
-    -fx-font-family: 'Montserrat';
 }
 
 .update-btn {
@@ -132,7 +122,6 @@
     -fx-cursor: hand;
     -fx-text-fill: #fff;
     -fx-font-size: 14px;
-    -fx-font-family: 'Montserrat';
 }
 
 .delete-btn {
@@ -141,7 +130,6 @@
     -fx-cursor: hand;
     -fx-text-fill: #fff;
     -fx-font-size: 14px;
-    -fx-font-family: 'Montserrat';
 }
 
 .progress-bar {
