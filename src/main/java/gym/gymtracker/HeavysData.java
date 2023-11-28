@@ -1,18 +1,28 @@
 package gym.gymtracker;
 
 public class HeavysData {
+    private Integer heavyId;
     private String exercise;
     private Double heavy;
     private Integer maxRep;
     private Integer minRep;
     private Integer userId;
 
-    public HeavysData(String exercise, Double heavy, Integer maxRep, Integer minRep, Integer userId) {
+    public HeavysData(Integer heavyId, String exercise, Double heavy, Integer maxRep, Integer minRep, Integer userId) {
+        this.heavyId = heavyId;
         this.exercise = exercise;
         this.heavy = heavy;
         this.maxRep = maxRep;
         this.minRep = minRep;
         this.userId = userId;
+    }
+
+    public Integer getHeavyId() {
+        return heavyId;
+    }
+
+    public void setHeavyId(Integer heavyId) {
+        this.heavyId = heavyId;
     }
 
     public String getExercise() {

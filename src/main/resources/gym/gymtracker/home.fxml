@@ -209,8 +209,8 @@
                               <TextField fx:id="txtMaxRep" layoutX="197.0" layoutY="306.0" prefHeight="25.0" prefWidth="158.0" styleClass="textfield" stylesheets="@hello.css" />
                               <TextField fx:id="txtMinRep" layoutX="198.0" layoutY="339.0" prefHeight="25.0" prefWidth="158.0" styleClass="textfield" stylesheets="@hello.css" />
                               <Button fx:id="btnAdd" alignment="CENTER" contentDisplay="RIGHT" layoutX="522.0" layoutY="390.0" mnemonicParsing="false" onAction="#heavysAdd" prefHeight="25.0" prefWidth="93.0" styleClass="add-btn" stylesheets="@hello.css" text="    Adicionar" AnchorPane.leftAnchor="522.0" />
-                              <Button fx:id="btnEdit" layoutX="441.0" layoutY="390.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" styleClass="update-btn" stylesheets="@hello.css" text="    Editar" />
-                              <Button fx:id="btnDelete" layoutX="357.0" layoutY="390.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="73.0" styleClass="delete-btn" stylesheets="@hello.css" text="    Excluir">
+                              <Button fx:id="btnEdit" layoutX="441.0" layoutY="390.0" mnemonicParsing="false" onAction="#heavysUpdate" prefHeight="30.0" prefWidth="70.0" styleClass="update-btn" stylesheets="@hello.css" text="    Editar" />
+                              <Button fx:id="btnDelete" layoutX="357.0" layoutY="390.0" mnemonicParsing="false" onAction="#heavysDelete" prefHeight="30.0" prefWidth="73.0" styleClass="delete-btn" stylesheets="@hello.css" text="    Excluir">
                                  <font>
                                     <Font name="Montserrat SemiBold Italic" size="12.0" />
                                  </font>

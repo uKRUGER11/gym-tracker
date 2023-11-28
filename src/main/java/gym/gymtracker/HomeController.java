@@ -1,7 +1,6 @@
 package gym.gymtracker;
 
 import gym.gymtracker.db.DB;
-import gym.gymtracker.utils.Alerts;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -126,7 +125,7 @@ public class HomeController implements Initializable {
             rs = ps.executeQuery();
 
             while(rs.next()) {
-                heavy = new HeavysData(rs.getString("exercise"), rs.getDouble("heavy"), rs.getInt("MaxRep"), rs.getInt("MinRep"), rs.getInt("UserId"));
+                heavy = new HeavysData(rs.getInt("Id"), rs.getString("exercise"), rs.getDouble("heavy"), rs.getInt("MaxRep"), rs.getInt("MinRep"), rs.getInt("UserId"));
 
                 if (heavy.getUserId() == rs.getInt("UserId")) {
                     listHeavys.add(heavy);
@@ -156,7 +155,7 @@ public class HomeController implements Initializable {
         HeavysData heavys = tableViewHeavys.getSelectionModel().getSelectedItem();
         int num = tableViewHeavys.getSelectionModel().getSelectedIndex();
 
-        if ((num - 1) < - 1) {
+        if (num < 0) {
             return;
         }
 
@@ -213,6 +212,96 @@ public class HomeController implements Initializable {
 
                     addHeavyShowList();
                     heavysAddClear();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void heavysUpdate() {
+        int row = tableViewHeavys.getSelectionModel().getSelectedIndex();
+        int currentUserId = AppContext.getCurrentUserId();
+
+        String updateHeavys = "UPDATE loads "
+                + "SET exercise = ?, heavy = ?, MaxRep = ?, MinRep = ? "
+                + "WHERE UserId = ? AND Id = ?";
+
+        connect = DB.connectDb();
+
+        try {
+            Alert alert;
+
+            if (row < 0 || txtExercise.getText().isEmpty() || txtHeavy.getText().isEmpty() || txtMaxRep.getText().isEmpty() || txtMinRep.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Mensagem de erro");
+                alert.setHeaderText(null);
+                alert.setContentText("Selecione um exercício na tabela e preencha todos os campos.");
+                alert.showAndWait();
+            } else {
+                st  = connect.createStatement();
+                ps = connect.prepareStatement(updateHeavys);
+
+                    HeavysData selectedHeavys = tableViewHeavys.getItems().get(row);
+
+                    ps.setString(1, txtExercise.getText());
+                    ps.setDouble(2, Double.parseDouble(txtHeavy.getText()));
+                    ps.setInt(3, Integer.parseInt(txtMaxRep.getText()));
+                    ps.setInt(4, Integer.parseInt(txtMinRep.getText()));
+                    ps.setInt(5, currentUserId);
+                    ps.setInt(6, selectedHeavys.getHeavyId());
+
+                    ps.executeUpdate();
+
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Mensagem de informação");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Exercício editado com sucesso!");
+                    alert.showAndWait();
+
+                    addHeavyShowList();
+                    heavysAddClear();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void heavysDelete() {
+        String deleteHeavys = "DELETE FROM loads WHERE exercise = '" + txtExercise.getText() + "'";
+
+        connect = DB.connectDb();
+
+        try {
+            Alert alert;
+
+            if (txtExercise.getText().isEmpty() || txtHeavy.getText().isEmpty() || txtMaxRep.getText().isEmpty() || txtMinRep.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Mensagem de erro");
+                alert.setHeaderText(null);
+                alert.setContentText("Selecione um exercício na tabela para excluir algo.");
+                alert.showAndWait();
+            } else {
+                alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Mensagem de confirmação");
+                alert.setHeaderText(null);
+                alert.setContentText("Você tem certeza que deseja excluir esse exercício?");
+                Optional<ButtonType> option = alert.showAndWait();
+
+                if (option.get().equals(ButtonType.OK)) {
+                    st = connect.createStatement();
+                    st.executeUpdate(deleteHeavys);
+
+                    alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Mensagem de confirmação");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Exercício excluído com sucesso!");
+                    alert.showAndWait();
+
+                    addHeavyShowList();
+                    heavysAddClear();
+                } else {
+                    return;
                 }
             }
         } catch (Exception e) {
