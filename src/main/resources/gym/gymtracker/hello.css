@@ -73,15 +73,15 @@
 }
 
 .table-view {
-    -fx-background-color: transparent;
-    -fx-padding: 0px;
-    -fx-border-color: #18224a;
-    -fx-border-width: 2px;
-    -fx-border-radius: 8px;
+     -fx-background-color: transparent;
+     -fx-padding: 0px;
+     -fx-border-color: black;
+     -fx-border-width: 2px;
+     -fx-border-radius: 8px;
 }
 
-.table-view .column-header {
-    -fx-background-color: linear-gradient(to bottom right, #18224a 95%, #f4e022 100%);
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom right, #f4e022 80%, #18224a 100%);
     -fx-background-radius: 8px 8px 0px 0px;
     -fx-background-inset: 0 0 0 0;
 }
@@ -98,7 +98,7 @@
 .textfield {
     -fx-background-color: linear-gradient(to bottom, #efefef, #eee);
     -fx-background-radius: 4px;
-    -fx-border-color: #18224a;
+    -fx-border-color: black;
     -fx-border-width: .8px;
     -fx-border-radius: 4px;
 }

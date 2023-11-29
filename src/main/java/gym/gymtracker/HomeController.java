@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -55,10 +56,10 @@ public class HomeController implements Initializable {
     private Button btnProgress;
 
     @FXML
-    private BarChart<?, ?> chartDays;
+    private LineChart<?, ?> chartDays;
 
     @FXML
-    private BarChart<?, ?> chartLevel;
+    private LineChart<?, ?> chartLevel;
 
     @FXML
     private AnchorPane formHome;
@@ -92,6 +93,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private Label txtTotalHeavy;
+
+    @FXML
+    private Label txtTotalHeavyName;
 
     @FXML
     private TextField txtExercise;
@@ -165,6 +169,34 @@ public class HomeController implements Initializable {
         txtMaxRep.setText(Integer.toString(heavys.getMaxRep()));
         txtMinRep.setText(Integer.toString(heavys.getMinRep()));
     }
+
+
+    public void homeDisplayMaxHeavy() {
+        String checkMaxHeavy = "SELECT exercise, heavy FROM loads WHERE UserId = ? ORDER BY heavy DESC LIMIT 1";
+
+        connect = DB.connectDb();
+
+        int currentUserId = AppContext.getCurrentUserId();
+
+        try {
+            ps = connect.prepareStatement(checkMaxHeavy);
+            ps.setInt(1, currentUserId);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String exerciseName = rs.getString("exercise");
+                double maxHeavy = rs.getDouble("heavy");
+
+                String displayText = "no " + exerciseName;
+                txtTotalHeavy.setText(String.valueOf(maxHeavy));
+                txtTotalHeavyName.setText(displayText);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //public void homeDisplay
 
     public void heavysAdd() {
         int currentUserId = AppContext.getCurrentUserId();
@@ -371,6 +403,7 @@ public class HomeController implements Initializable {
             btnHome.setStyle("-fx-background-color: linear-gradient(to bottom, #18224a 95%, #f4e022 100%);");
             btnHeavys.setStyle("-fx-background-color: transparent");
             btnProgress.setStyle("-fx-background-color: transparent");
+            homeDisplayMaxHeavy();
         } else if (event.getSource() == btnHeavys) {
             formHome.setVisible(false);
             formLoads.setVisible(true);
@@ -399,6 +432,9 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        String formattedDate = AppContext.getFormatedDate();
+        txtDate.setText(formattedDate);
+        homeDisplayMaxHeavy();
         addHeavyShowList();
     }
 }
