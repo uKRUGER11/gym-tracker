@@ -141,3 +141,37 @@
     -fx-background-color: #4caf50;
     -fx-background-radius: 10;
 }
+
+.chart {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-radius: 4px;
+}
+
+.chart-title {
+    -fx-text-fill: black;
+}
+
+.axis-label {
+    -fx-text-fill: #FFFFFF;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.default-color0.chart-series-line {
+    -fx-stroke: #18224a ;
+}
+
+.default-color1.chart-series-line {
+    -fx-stroke: #f4e022;
+}
+
+.default-color0.chart-line-symbol {
+    -fx-background-color: #18224a, #18224a ;
+}
+
+.default-color1.chart-line-symbol {
+    -fx-background-color: #f4e022, #f4e022;
+}

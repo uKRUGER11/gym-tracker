@@ -2,7 +2,6 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
-<?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
@@ -123,49 +122,33 @@
                                                       <Image url="@dumbeel.png" />
                                                    </image>
                                                 </ImageView>
-                                                <Label layoutX="90.0" layoutY="52.0" style="-fx-text-fill: #FFF;" stylesheets="@hello.css" text="Carga Máxima" textFill="WHITE">
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="4.0" style="-fx-text-fill: #FFF;" stylesheets="@hello.css" text="Carga Máxima" textFill="WHITE">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="txtTotalHeavy" layoutX="145.0" layoutY="7.0" prefHeight="21.0" prefWidth="47.0" style="-fx-text-fill: #FFF; -fx-alignment: CENTER-LEFT;" stylesheets="@hello.css" textFill="WHITE">
+                                                <Label fx:id="txtTotalHeavy" layoutX="100.0" layoutY="29.0" prefHeight="21.0" prefWidth="61.0" style="-fx-text-fill: #FFF; -fx-alignment: CENTER-LEFT;" stylesheets="@hello.css" textFill="WHITE">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="txtTotalHeavyName" layoutX="118.0" layoutY="29.0" prefHeight="21.0" prefWidth="74.0" style="-fx-text-fill: #FFF; -fx-alignment: CENTER-LEFT;" stylesheets="@hello.css" textFill="WHITE" />
+                                                <Label fx:id="txtTotalHeavyName" layoutX="95.0" layoutY="49.0" prefHeight="21.0" prefWidth="88.0" style="-fx-text-fill: #FFF; -fx-alignment: CENTER-LEFT;" stylesheets="@hello.css" textFill="WHITE" />
                                              </children>
                                           </AnchorPane>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="13.0" layoutY="259.0" prefHeight="173.0" prefWidth="592.0" stylesheets="@hello.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="259.0">
+                                    <AnchorPane layoutX="7.0" layoutY="95.0" prefHeight="332.0" prefWidth="600.0" stylesheets="@hello.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="95.0">
                                        <styleClass>
                                           <String fx:value="shadow" />
                                           <String fx:value="white-background" />
                                        </styleClass>
                                        <children>
-                                          <LineChart fx:id="chartDays" layoutX="7.0" prefHeight="162.0" prefWidth="591.0" title="Dias de Treino">
+                                          <LineChart fx:id="chartLevel" layoutX="3.0" legendVisible="false" prefHeight="334.0" prefWidth="596.0" stylesheets="@hello.css" title="Níveis das Cargas" AnchorPane.bottomAnchor="-2.0" AnchorPane.topAnchor="0.0">
                                             <xAxis>
-                                              <CategoryAxis side="BOTTOM" />
+                                              <NumberAxis prefHeight="16.0" prefWidth="446.0" side="BOTTOM" />
                                             </xAxis>
                                             <yAxis>
-                                              <NumberAxis side="LEFT" />
-                                            </yAxis>
-                                          </LineChart>
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane layoutX="16.0" layoutY="96.0" prefHeight="158.0" prefWidth="602.0" stylesheets="@hello.css" AnchorPane.rightAnchor="7.0">
-                                       <styleClass>
-                                          <String fx:value="shadow" />
-                                          <String fx:value="white-background" />
-                                       </styleClass>
-                                       <children>
-                                          <LineChart fx:id="chartLevel" layoutY="-4.0" prefHeight="162.0" prefWidth="590.0" title="Níveis de Carga">
-                                            <xAxis>
-                                              <CategoryAxis side="BOTTOM" />
-                                            </xAxis>
-                                            <yAxis>
-                                              <NumberAxis side="LEFT" />
+                                              <NumberAxis prefHeight="289.0" prefWidth="25.0" side="LEFT" />
                                             </yAxis>
                                           </LineChart>
                                        </children>

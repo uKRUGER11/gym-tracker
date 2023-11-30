@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -23,8 +25,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 
 public class HomeController implements Initializable {
@@ -59,7 +63,7 @@ public class HomeController implements Initializable {
     private LineChart<?, ?> chartDays;
 
     @FXML
-    private LineChart<?, ?> chartLevel;
+    private LineChart<Number, Number> chartLevel;
 
     @FXML
     private AnchorPane formHome;
@@ -187,8 +191,8 @@ public class HomeController implements Initializable {
                 String exerciseName = rs.getString("exercise");
                 double maxHeavy = rs.getDouble("heavy");
 
-                String displayText = "no " + exerciseName;
-                txtTotalHeavy.setText(String.valueOf(maxHeavy));
+                String displayText =  "no " + exerciseName;
+                txtTotalHeavy.setText(String.valueOf(maxHeavy + "Kg"));
                 txtTotalHeavyName.setText(displayText);
             }
         } catch (Exception e) {
@@ -196,7 +200,48 @@ public class HomeController implements Initializable {
         }
     }
 
-    //public void homeDisplay
+
+    public void homeDisplayHeavysLevels() {
+        int userId = AppContext.getCurrentUserId();
+        chartLevel.getData().clear();
+
+        String levelSql = "SELECT heavy, MinRep, COUNT(heavy) FROM loads WHERE UserId = ? GROUP BY heavy, MinRep";
+
+        connect = DB.connectDb();
+
+        try {
+            XYChart.Series<Number, Number> chart = new XYChart.Series<>();
+            NumberAxis xAxis = (NumberAxis) chartLevel.getXAxis();
+            NumberAxis yAxis = (NumberAxis) chartLevel.getYAxis();
+            xAxis.setAutoRanging(false);
+            xAxis.setUpperBound(20);
+            xAxis.setLowerBound(1);
+
+            ps = connect.prepareStatement(levelSql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+
+            Set<Integer> addedMinReps = new HashSet<>();
+            chart.getData().add(new XYChart.Data<>(0, 0));
+            while (rs.next()) {
+                double heavy = rs.getDouble(1);
+                int minRep = rs.getInt(2);
+                int count = rs.getInt(3);
+
+
+                for (int i = 0; i < count; i++) {
+                    if (!addedMinReps.contains(minRep)) {
+                        chart.getData().add(new XYChart.Data<>(minRep, heavy));
+                        addedMinReps.add(minRep);
+                    }
+                }
+            }
+
+            chartLevel.getData().add(chart);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void heavysAdd() {
         int currentUserId = AppContext.getCurrentUserId();
@@ -404,6 +449,7 @@ public class HomeController implements Initializable {
             btnHeavys.setStyle("-fx-background-color: transparent");
             btnProgress.setStyle("-fx-background-color: transparent");
             homeDisplayMaxHeavy();
+            homeDisplayHeavysLevels();
         } else if (event.getSource() == btnHeavys) {
             formHome.setVisible(false);
             formLoads.setVisible(true);
@@ -435,6 +481,7 @@ public class HomeController implements Initializable {
         String formattedDate = AppContext.getFormatedDate();
         txtDate.setText(formattedDate);
         homeDisplayMaxHeavy();
+        homeDisplayHeavysLevels();
         addHeavyShowList();
     }
 }

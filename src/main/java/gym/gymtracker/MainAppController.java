@@ -84,13 +84,10 @@ public class MainAppController implements Initializable {
                     alert.errorMessage("Usuário e/ou senha incorretos.");
                 }
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
