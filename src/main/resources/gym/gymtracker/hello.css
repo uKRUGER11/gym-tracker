@@ -133,14 +133,10 @@
 }
 
 .progress-bar {
-    -fx-background-color: #f0f0f0;
+    -fx-accent: #00FF00;
     -fx-background-radius: 10;
 }
 
-.progress-bar .bar {
-    -fx-background-color: #4caf50;
-    -fx-background-radius: 10;
-}
 
 .chart {
     -fx-background-color: transparent;

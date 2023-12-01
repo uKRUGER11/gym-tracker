@@ -1,6 +1,10 @@
 package gym.gymtracker;
 
 import gym.gymtracker.db.DB;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,20 +24,30 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 public class HomeController implements Initializable {
     private double x = 0;
     private double y = 0;
+
+    BigDecimal progress = new BigDecimal(String.format(Locale.US, "%.2f", 0.0));
+    private final int totalDays = 312;
+    private LocalDateTime lastClickTime = LocalDateTime.MIN;
 
     @FXML
     private Button btnAdd;
@@ -93,7 +107,19 @@ public class HomeController implements Initializable {
     private TableView<HeavysData> tableViewHeavys;
 
     @FXML
+    private ProgressBar progressBar;
+
+    //@FXML
+    //private Button addProgress;
+
+    @FXML
     private Label txtDate;
+
+    @FXML
+    private Label percentage;
+
+    @FXML
+    private Label txtDate2;
 
     @FXML
     private Label txtTotalHeavy;
@@ -192,14 +218,13 @@ public class HomeController implements Initializable {
                 double maxHeavy = rs.getDouble("heavy");
 
                 String displayText =  "no " + exerciseName;
-                txtTotalHeavy.setText(String.valueOf(maxHeavy + "Kg"));
+                txtTotalHeavy.setText(maxHeavy + "Kg");
                 txtTotalHeavyName.setText(displayText);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     public void homeDisplayHeavysLevels() {
         int userId = AppContext.getCurrentUserId();
@@ -393,6 +418,44 @@ public class HomeController implements Initializable {
         txtMinRep.setText("");
     }
 
+    public void addProgress() {
+        LocalDateTime currentTime = LocalDateTime.now();
+        Duration durationSinceLastClick =  Duration.between(lastClickTime, currentTime);
+
+        if (durationSinceLastClick.toHours() >= 24 && progress.intValue() < totalDays) {
+            progress = progress.add(BigDecimal.ONE);
+            updateProgress();
+            lastClickTime = currentTime;
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Mensagem de erro");
+            alert.setHeaderText(null);
+            alert.setContentText("Você só pode adicionar +1 uma vez a cada 24 horas. Aguarde até o próximo dia para continuar seu progresso.");
+            alert.showAndWait();
+        }
+
+        progress = progress.add(BigDecimal.ONE);
+        updateProgress();
+        btnProgress.fire();
+    }
+
+    private void updateProgress() {
+        int per = Math.min(progress.multiply(BigDecimal.valueOf(100)).intValue() / totalDays, 100);
+
+        progressBar.setProgress(per / 100.0);
+
+        percentage.setText(per + "%");
+
+        if (per == 100) {
+            Alert alert;
+            alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Mensagem de confirmação");
+            alert.setHeaderText(null);
+            alert.setContentText("Parabéns por concluir 1 ano de treino, você tem direito a 1 Whey da sua preferência!");
+            alert.showAndWait();
+        }
+    }
+
     public void logout() {
         try {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -480,6 +543,7 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String formattedDate = AppContext.getFormatedDate();
         txtDate.setText(formattedDate);
+        txtDate2.setText(formattedDate);
         homeDisplayMaxHeavy();
         homeDisplayHeavysLevels();
         addHeavyShowList();
