@@ -137,6 +137,14 @@
     -fx-background-radius: 10;
 }
 
+.btnAddProgress {
+    -fx-background-color: linear-gradient(to bottom right, #f4e022 80%, #18224a 100%);
+    -fx-text-fill: white;
+    -fx-background-radius: 50;
+    -fx-padding: 8 16;
+    -fx-font-size: 12;
+}
+
 
 .chart {
     -fx-background-color: transparent;

@@ -3,6 +3,7 @@ module gym.gymtracker {
     requires javafx.fxml;
     requires java.sql;
     requires mysql.connector.java;
+    requires java.prefs;
 
 
     opens gym.gymtracker to javafx.fxml;

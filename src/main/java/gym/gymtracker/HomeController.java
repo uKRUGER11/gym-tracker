@@ -36,6 +36,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.prefs.Preferences;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -45,9 +46,7 @@ public class HomeController implements Initializable {
     private double x = 0;
     private double y = 0;
 
-    BigDecimal progress = new BigDecimal(String.format(Locale.US, "%.2f", 0.0));
-    private final int totalDays = 312;
-    private LocalDateTime lastClickTime = LocalDateTime.MIN;
+
 
     @FXML
     private Button btnAdd;
@@ -72,6 +71,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private Button btnProgress;
+
+    @FXML
+    private Button btnAddProgress;
 
     @FXML
     private LineChart<?, ?> chartDays;
@@ -418,25 +420,37 @@ public class HomeController implements Initializable {
         txtMinRep.setText("");
     }
 
+    BigDecimal progress = new BigDecimal(String.format(Locale.US, "%.2f", 0.0));
+    private final int totalDays = 312;
+    private LocalDateTime lastClickTime = LocalDateTime.MIN;
+    private Preferences prefs = Preferences.userNodeForPackage(HomeController.class);
+
     public void addProgress() {
         LocalDateTime currentTime = LocalDateTime.now();
-        Duration durationSinceLastClick =  Duration.between(lastClickTime, currentTime);
+        Duration durationSinceLastClick = Duration.between(lastClickTime, currentTime);
 
         if (durationSinceLastClick.toHours() >= 24 && progress.intValue() < totalDays) {
             progress = progress.add(BigDecimal.ONE);
             updateProgress();
             lastClickTime = currentTime;
+            btnAddProgress.setDisable(true);
+
+            ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+            scheduler.schedule(() -> {
+                Platform.runLater(() -> btnAddProgress.setDisable(false));
+            }, 24, TimeUnit.HOURS);
+
+
+            prefs.put("progress", progress.toString());
+            prefs.put("lastClickTime", lastClickTime.toString());
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Mensagem de erro");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aviso");
             alert.setHeaderText(null);
             alert.setContentText("Você só pode adicionar +1 uma vez a cada 24 horas. Aguarde até o próximo dia para continuar seu progresso.");
+
             alert.showAndWait();
         }
-
-        progress = progress.add(BigDecimal.ONE);
-        updateProgress();
-        btnProgress.fire();
     }
 
     private void updateProgress() {
@@ -544,6 +558,9 @@ public class HomeController implements Initializable {
         String formattedDate = AppContext.getFormatedDate();
         txtDate.setText(formattedDate);
         txtDate2.setText(formattedDate);
+        progress = new BigDecimal(prefs.get("progress", "0.0"));
+        lastClickTime = LocalDateTime.parse(prefs.get("lastClickTime", LocalDateTime.MIN.toString()));
+        updateProgress();
         homeDisplayMaxHeavy();
         homeDisplayHeavysLevels();
         addHeavyShowList();
