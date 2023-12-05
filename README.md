@@ -4,7 +4,7 @@
     <tr>
       <td align="center"><img src="img/login.png">Login</td>
       <td align="center"><img src="img/home.png">Home</td>
-      <td align="center"><img src="img/cargas.png">Cargas(as)</td>
+      <td align="center"><img src="img/cargas.png">Carga(as)</td>
       <td align="center"><img src="img/BarraDeProgresso.png">Barra de Progresso</td>
     </tr>
   </table>
