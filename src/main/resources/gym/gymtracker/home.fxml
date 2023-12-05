@@ -239,7 +239,7 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="btnAddProgress" layoutX="279.0" layoutY="240.0" mnemonicParsing="false" onAction="#addProgress" prefHeight="61.0" prefWidth="64.0" styleClass="btnAddProgress" stylesheets="@hello.css">
+                              <Button fx:id="btnAddProgress" layoutX="268.0" layoutY="240.0" mnemonicParsing="false" onAction="#addProgress" prefHeight="61.0" prefWidth="64.0" styleClass="btnAddProgress" stylesheets="@hello.css">
                                  <font>
                                     <Font size="20.0" />
                                  </font></Button>
@@ -253,7 +253,7 @@
                                     <Font name="System Bold" size="20.0" />
                                  </font>
                               </Label>
-                              <ImageView fitHeight="36.0" fitWidth="31.0" layoutX="296.0" layoutY="255.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="36.0" fitWidth="31.0" layoutX="285.0" layoutY="255.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@biceps.png" />
                                  </image>
