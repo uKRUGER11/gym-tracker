@@ -1,15 +1,15 @@
-<!--  
 <div align="center">
   <h1>Imagens da aplicação</h1>
   <table style="display: inline-table;">
     <tr>
-      <td align="center"><img src="gifs/telas.gif"></td>
-      <td align="center"><img src="gifs/tela-departamento.gif">Departamentos</td>
-      <td align="center"><img src="gifs/tela-vendedor.gif">Vendedores(as)</td>
+      <td align="center"><img src="img/login.png">Login</td>
+      <td align="center"><img src="img/home.png">Home</td>
+      <td align="center"><img src="img/cargas.png">Carga(as)</td>
+      <td align="center"><img src="img/BarraDeProgresso.png">Barra de Progresso</td>
     </tr>
   </table>
 </div>
--->
+
 <br>
 <h4>
    Aplicação que gerencia o desempenho de usuários que praticam musculação, para otimizar e monitorar seu desempenho de maneira eficaz. Neste contexto, o projeto é dedicado ao         gerenciamento integral do desempenho de usuários engajados na prática da musculação. <br>
