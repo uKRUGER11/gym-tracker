@@ -62,6 +62,7 @@ public class MainAppController implements Initializable {
 
             if (txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()) {
                 alert.errorMessage("Preencha todos os campos.");
+
             } else {
                 if (rs.next()) {
                     int userId = rs.getInt("Id");

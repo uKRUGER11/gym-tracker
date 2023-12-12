@@ -5,7 +5,7 @@
 }
 
 .left-form {
-    -fx-background-color:linear-gradient(to bottom right, #18224a ,#f4e022);
+    -fx-background-color:linear-gradient(to bottom right, #18224a, #f4e022);
 }
 
 .button-login {
@@ -178,4 +178,20 @@
 
 .default-color1.chart-line-symbol {
     -fx-background-color: #f4e022, #f4e022;
+}
+
+.alert {
+    -fx-background-color: linear-gradient(to right, white 98%, #f4e022 100%);
+    -fx-text-fill: #f4e022;
+    -fx-border-radius: 5px;
+    -fx-border-color: #18224a;
+    -fx-border-width: 2px 0 2px 2px;
+}
+
+.alert .dialog-pane {
+    -fx-background-color: #18224a;
+}
+
+.alert .dialog-pane .content-panel .label {
+    -fx-text-fill: #f4e022;
 }

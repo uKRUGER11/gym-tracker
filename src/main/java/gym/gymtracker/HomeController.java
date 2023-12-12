@@ -41,12 +41,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-
 public class HomeController implements Initializable {
     private double x = 0;
     private double y = 0;
 
-
+    BigDecimal progress = new BigDecimal(String.format(Locale.US, "%.2f", 0.0));
+    private final int totalDays = 312;
+    private LocalDateTime lastClickTime = LocalDateTime.MIN;
+    private Preferences prefs = Preferences.userNodeForPackage(HomeController.class);
 
     @FXML
     private Button btnAdd;
@@ -285,6 +287,8 @@ public class HomeController implements Initializable {
                 alert.setTitle("Mensagem de erro");
                 alert.setHeaderText(null);
                 alert.setContentText("Preencha todos os campos.");
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("hello.css").toExternalForm());
+                alert.initStyle(StageStyle.TRANSPARENT);
                 alert.showAndWait();
             } else {
                 String checkHeavy = "SELECT * FROM loads WHERE exercise  = '" + txtExercise.getText() + "'";
@@ -297,6 +301,8 @@ public class HomeController implements Initializable {
                     alert.setTitle("Mensagem de erro");
                     alert.setHeaderText(null);
                     alert.setContentText("O exercício " + txtExercise.getText() + " já existe!");
+                    alert.getDialogPane().getStylesheets().add(getClass().getResource("hello.css").toExternalForm());
+                    alert.initStyle(StageStyle.TRANSPARENT);
                     alert.showAndWait();
                 } else {
                     ps = connect.prepareStatement(insertHeavy);
@@ -312,6 +318,8 @@ public class HomeController implements Initializable {
                     alert.setTitle("Mensagem de informação");
                     alert.setHeaderText(null);
                     alert.setContentText("Exercício adcionado com sucesso!");
+                    alert.getDialogPane().getStylesheets().add(getClass().getResource("hello.css").toExternalForm());
+                    alert.initStyle(StageStyle.TRANSPARENT);
                     alert.showAndWait();
 
                     addHeavyShowList();
@@ -341,6 +349,8 @@ public class HomeController implements Initializable {
                 alert.setTitle("Mensagem de erro");
                 alert.setHeaderText(null);
                 alert.setContentText("Selecione um exercício na tabela e preencha todos os campos.");
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("hello.css").toExternalForm());
+                alert.initStyle(StageStyle.TRANSPARENT);
                 alert.showAndWait();
             } else {
                 st  = connect.createStatement();
@@ -361,6 +371,8 @@ public class HomeController implements Initializable {
                     alert.setTitle("Mensagem de informação");
                     alert.setHeaderText(null);
                     alert.setContentText("Exercício editado com sucesso!");
+                    alert.getDialogPane().getStylesheets().add(getClass().getResource("hello.css").toExternalForm());
+                    alert.initStyle(StageStyle.TRANSPARENT);
                     alert.showAndWait();
 
                     addHeavyShowList();
@@ -384,12 +396,16 @@ public class HomeController implements Initializable {
                 alert.setTitle("Mensagem de erro");
                 alert.setHeaderText(null);
                 alert.setContentText("Selecione um exercício na tabela para excluir algo.");
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("hello.css").toExternalForm());
+                alert.initStyle(StageStyle.TRANSPARENT);
                 alert.showAndWait();
             } else {
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Mensagem de confirmação");
                 alert.setHeaderText(null);
                 alert.setContentText("Você tem certeza que deseja excluir esse exercício?");
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("hello.css").toExternalForm());
+                alert.initStyle(StageStyle.TRANSPARENT);
                 Optional<ButtonType> option = alert.showAndWait();
 
                 if (option.get().equals(ButtonType.OK)) {
@@ -400,6 +416,8 @@ public class HomeController implements Initializable {
                     alert.setTitle("Mensagem de confirmação");
                     alert.setHeaderText(null);
                     alert.setContentText("Exercício excluído com sucesso!");
+                    alert.getDialogPane().getStylesheets().add(getClass().getResource("hello.css").toExternalForm());
+                    alert.initStyle(StageStyle.TRANSPARENT);
                     alert.showAndWait();
 
                     addHeavyShowList();
@@ -420,11 +438,6 @@ public class HomeController implements Initializable {
         txtMinRep.setText("");
     }
 
-    BigDecimal progress = new BigDecimal(String.format(Locale.US, "%.2f", 0.0));
-    private final int totalDays = 312;
-    private LocalDateTime lastClickTime = LocalDateTime.MIN;
-    private Preferences prefs = Preferences.userNodeForPackage(HomeController.class);
-
     public void addProgress() {
         LocalDateTime currentTime = LocalDateTime.now();
         Duration durationSinceLastClick = Duration.between(lastClickTime, currentTime);
@@ -433,7 +446,6 @@ public class HomeController implements Initializable {
             progress = progress.add(BigDecimal.ONE);
             updateProgress();
             lastClickTime = currentTime;
-            btnAddProgress.setDisable(true);
 
             ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
             scheduler.schedule(() -> {
@@ -448,7 +460,8 @@ public class HomeController implements Initializable {
             alert.setTitle("Aviso");
             alert.setHeaderText(null);
             alert.setContentText("Você só pode adicionar +1 uma vez a cada 24 horas. Aguarde até o próximo dia para continuar seu progresso.");
-
+            alert.getDialogPane().getStylesheets().add(getClass().getResource("hello.css").toExternalForm());
+            alert.initStyle(StageStyle.TRANSPARENT);
             alert.showAndWait();
         }
     }
@@ -466,6 +479,8 @@ public class HomeController implements Initializable {
             alert.setTitle("Mensagem de confirmação");
             alert.setHeaderText(null);
             alert.setContentText("Parabéns por concluir 1 ano de treino, você tem direito a 1 Whey da sua preferência!");
+            alert.getDialogPane().getStylesheets().add(getClass().getResource("hello.css").toExternalForm());
+            alert.initStyle(StageStyle.TRANSPARENT);
             alert.showAndWait();
         }
     }
@@ -476,6 +491,8 @@ public class HomeController implements Initializable {
             alert.setTitle("Mensagem de confirmação");
             alert.setHeaderText(null);
             alert.setContentText("Você tem certeza que deseja sair?");
+            alert.getDialogPane().getStylesheets().add(getClass().getResource("hello.css").toExternalForm());
+            alert.initStyle(StageStyle.TRANSPARENT);
 
             Optional<ButtonType> optional = alert.showAndWait();
 
